@@ -18,7 +18,10 @@ public class CourseMaterial {
     private Long courseMaterialId;
     private String url;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,    // Sync between parent and child stays
+            fetch = FetchType.LAZY,         // LAZY = fetch when needed, EAGER = fetch immediately
+            optional = false                // course material is required when saving a course. By default, it is false
+    )
     @JoinColumn(name = "course_id", referencedColumnName = "courseId")
     private Course course;
 }
